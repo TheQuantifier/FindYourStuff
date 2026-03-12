@@ -71,6 +71,28 @@ async function loadUsers() {
   renderUsers(users ?? []);
 }
 
+async function signOut() {
+  setError("");
+  if (logoutButton) {
+    logoutButton.disabled = true;
+  }
+
+  try {
+    await api("/auth/logout", { method: "POST", body: JSON.stringify({}) });
+    const { user } = await api("/auth/session");
+    if (user) {
+      throw new Error("Sign out did not clear the current session.");
+    }
+
+    window.location.href = "./login.html";
+  } catch (error) {
+    setError(error instanceof Error ? error.message : "Failed to sign out.");
+    if (logoutButton) {
+      logoutButton.disabled = false;
+    }
+  }
+}
+
 adminUserGrid?.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -105,10 +127,7 @@ adminUserGrid?.addEventListener("submit", async (event) => {
   }
 });
 
-logoutButton?.addEventListener("click", async () => {
-  await api("/auth/logout", { method: "POST", body: JSON.stringify({}) });
-  window.location.href = "./login.html";
-});
+logoutButton?.addEventListener("click", signOut);
 
 loadUsers().catch((error) => {
   setError(error instanceof Error ? error.message : "Failed to load admin users.");

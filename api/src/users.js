@@ -55,11 +55,7 @@ async function countAdmins() {
 
 async function shouldBootstrapAdmin(email) {
   const adminEmails = new Set(getAdminEmails());
-  if (email && adminEmails.has(email)) {
-    return true;
-  }
-
-  return (await countAdmins()) === 0;
+  return Boolean(email && adminEmails.has(email));
 }
 
 function toPublicUser(row) {

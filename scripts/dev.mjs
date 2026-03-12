@@ -1,13 +1,19 @@
 import { spawn } from "node:child_process";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const projectRoot = path.resolve(__dirname, "..");
 
 const api = spawn("node", ["api/src/server.js"], {
   stdio: "inherit",
-  cwd: process.cwd(),
+  cwd: projectRoot,
 });
 
-const web = spawn("python3", ["-m", "http.server", "5500", "-d", "web"], {
+const web = spawn("node", ["scripts/static-server.mjs"], {
   stdio: "inherit",
-  cwd: process.cwd(),
+  cwd: projectRoot,
 });
 
 function shutdown(code = 0) {

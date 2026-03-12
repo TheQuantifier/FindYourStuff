@@ -59,6 +59,28 @@ async function bootstrap() {
   renderItems(itemsResult.items ?? []);
 }
 
+async function signOut() {
+  chatError.textContent = "";
+  if (logoutButton) {
+    logoutButton.disabled = true;
+  }
+
+  try {
+    await api("/auth/logout", { method: "POST", body: JSON.stringify({}) });
+    const session = await api("/auth/session");
+    if (session.user) {
+      throw new Error("Sign out did not clear the current session.");
+    }
+
+    window.location.href = "./login.html";
+  } catch (error) {
+    chatError.textContent = error instanceof Error ? error.message : "Failed to sign out.";
+    if (logoutButton) {
+      logoutButton.disabled = false;
+    }
+  }
+}
+
 chatForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
   chatError.textContent = "";
@@ -84,10 +106,7 @@ chatForm?.addEventListener("submit", async (event) => {
   }
 });
 
-logoutButton?.addEventListener("click", async () => {
-  await api("/auth/logout", { method: "POST", body: JSON.stringify({}) });
-  window.location.href = "./login.html";
-});
+logoutButton?.addEventListener("click", signOut);
 
 bootstrap().catch((error) => {
   chatError.textContent = error instanceof Error ? error.message : "Failed to load chat.";

@@ -4,13 +4,7 @@ const form = document.querySelector("[data-auth-form]");
 const errorNode = document.querySelector("[data-error]");
 
 function getAuthCallbackURL() {
-  const url = new URL("./chat.html", window.location.href);
-
-  if (url.hostname === "127.0.0.1") {
-    url.hostname = "localhost";
-  }
-
-  return url.toString();
+  return new URL("./chat.html", window.location.href).toString();
 }
 
 function setError(message = "") {

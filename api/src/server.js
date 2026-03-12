@@ -3,7 +3,13 @@ import dns from "node:dns";
 
 import { classifyMemoryMessage } from "./ai.js";
 import { appConfig, env, getAllowedOrigins } from "./env.js";
-import { ensureItemsTable, listRecentItems, searchItemMemories, upsertItemMemory } from "./items.js";
+import {
+  deleteItemMemory,
+  ensureItemsTable,
+  listRecentItems,
+  searchItemMemories,
+  upsertItemMemory,
+} from "./items.js";
 import { applyMigrationsOnce } from "./migrations.js";
 import {
   clearSessionCookie,
@@ -351,10 +357,52 @@ async function handleChat(request, response) {
     return;
   }
 
+  if (action.intent === "remove" && action.itemName.trim()) {
+    const matches = await searchItemMemories({
+      userId: user.id,
+      itemName: action.itemName,
+      searchTerms: action.searchTerms,
+    });
+
+    if (matches.length === 0) {
+      sendJson(response, 200, {
+        reply: `I couldn't find a saved item for ${action.itemName}.`,
+        items: await listRecentItems(user.id),
+      });
+      return;
+    }
+
+    if (matches.length > 1) {
+      const summary = matches
+        .slice(0, 3)
+        .map((match) => match.itemName)
+        .join(", ");
+
+      sendJson(response, 200, {
+        reply: `I found a few close matches: ${summary}. Tell me exactly which one to remove.`,
+        items: await listRecentItems(user.id),
+      });
+      return;
+    }
+
+    const removed = await deleteItemMemory({
+      userId: user.id,
+      itemName: matches[0].itemName,
+    });
+
+    sendJson(response, 200, {
+      reply: removed
+        ? `Removed ${removed.itemName} from your saved index.`
+        : `I couldn't remove ${action.itemName} because it was no longer saved.`,
+      items: await listRecentItems(user.id),
+    });
+    return;
+  }
+
   sendJson(response, 200, {
     reply:
       action.response ||
-      "I can store item locations and answer location questions. Try 'The charger is in the hall closet bin' or 'Where is the charger?'",
+      "I can store item locations, remove saved items, and answer location questions. Try 'The charger is in the hall closet bin', 'Remove the charger', or 'Where is the charger?'",
     items: await listRecentItems(user.id),
   });
 }

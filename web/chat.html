@@ -4,14 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chat | Find Your Stuff</title>
+    <link rel="icon" type="image/png" href="./images/logo.png" />
     <link rel="stylesheet" href="./styles/main.css" />
   </head>
   <body>
     <div class="shell">
       <header class="site-header">
         <a class="brand" href="./index.html">
-          <span class="brand-mark">OpenAI-style memory</span>
-          <span class="brand-name">Find Your Stuff</span>
+          <img class="brand-logo" src="./images/logo.png" alt="Find Your Stuff logo" />
+          <span class="brand-copy">
+            <span class="brand-title-group">
+              <span class="brand-name">Find Your Stuff</span>
+              <span class="brand-tagline">A calmer interface for finding things</span>
+            </span>
+          </span>
         </a>
         <nav class="header-links">
           <a class="ghost-link hidden" id="admin-link" href="./admin.html">Admin</a>
@@ -38,7 +44,7 @@
             <label class="sr-only" for="message">Message</label>
             <textarea id="message" name="message" rows="4" placeholder="Example: I left the camera battery in the gear drawer."></textarea>
             <div class="chat-actions">
-              <p class="muted">Store a fact with a statement. Retrieve it with a question.</p>
+              <p class="muted">Store with a statement, retrieve with a question, remove with "delete" or "forget".</p>
               <button class="primary-button" type="submit">Send</button>
             </div>
             <p class="error-text" id="chat-error"></p>

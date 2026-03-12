@@ -54,6 +54,30 @@ export async function upsertItemMemory(input) {
   return row;
 }
 
+export async function deleteItemMemory({ userId, itemName }) {
+  const normalizedItemName = normalizeItemName(itemName);
+  if (!normalizedItemName) {
+    return null;
+  }
+
+  const [row] = await sql`
+    DELETE FROM item_memories
+    WHERE user_id = ${userId}
+      AND normalized_item_name = ${normalizedItemName}
+    RETURNING
+      user_id AS "userId",
+      item_name AS "itemName",
+      normalized_item_name AS "normalizedItemName",
+      location_description AS "locationDescription",
+      category,
+      source_message AS "sourceMessage",
+      created_at::TEXT AS "createdAt",
+      updated_at::TEXT AS "updatedAt"
+  `;
+
+  return row ?? null;
+}
+
 export async function listRecentItems(userId, limit = 8) {
   return sql`
     SELECT

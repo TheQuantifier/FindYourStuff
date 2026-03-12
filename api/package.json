@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node src/server.js",
+    "open": "node ../scripts/open.mjs",
     "start": "node src/server.js",
     "migrate": "node src/run-migrations.js"
   },
