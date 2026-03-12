@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat | Find Your Stuff</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="site-header">
+        <a class="brand" href="./index.html">
+          <span class="brand-mark">OpenAI-style memory</span>
+          <span class="brand-name">Find Your Stuff</span>
+        </a>
+        <nav class="header-links">
+          <a class="ghost-link hidden" id="admin-link" href="./admin.html">Admin</a>
+          <button class="ghost-link" id="logout-button" type="button">Sign out</button>
+        </nav>
+      </header>
+
+      <main class="workspace">
+        <section class="panel hero-panel">
+          <p class="eyebrow" id="user-label">Signed in</p>
+          <h1>Find Your Stuff</h1>
+          <p class="lede">Use one thread to keep track of where things are, what moved, and what you need to find again later.</p>
+        </section>
+
+        <section class="panel chat-panel">
+          <div class="chat-log" id="chat-log">
+            <article class="bubble bubble-assistant">
+              <span class="bubble-role">Assistant</span>
+              <p>Tell me where you put something, like "My passport is in the blue folder."</p>
+            </article>
+          </div>
+
+          <form class="chat-form" id="chat-form">
+            <label class="sr-only" for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Example: I left the camera battery in the gear drawer."></textarea>
+            <div class="chat-actions">
+              <p class="muted">Store a fact with a statement. Retrieve it with a question.</p>
+              <button class="primary-button" type="submit">Send</button>
+            </div>
+            <p class="error-text" id="chat-error"></p>
+          </form>
+        </section>
+
+        <aside class="panel items-panel">
+          <div class="items-header">
+            <div>
+              <p class="eyebrow">Recent memory index</p>
+              <h2>Saved items</h2>
+            </div>
+          </div>
+          <ul class="item-grid" id="item-grid"></ul>
+          <p class="empty-state" id="empty-state">No saved items yet. Add one in the chat and it will appear here.</p>
+        </aside>
+      </main>
+    </div>
+
+    <script type="module" src="./scripts/chat.js"></script>
+  </body>
+  </html>

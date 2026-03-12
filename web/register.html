@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Find Your Stuff</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="site-header">
+        <a class="brand" href="./index.html">
+          <span class="brand-mark">OpenAI-style memory</span>
+          <span class="brand-name">Find Your Stuff</span>
+        </a>
+        <nav class="header-links">
+          <a class="ghost-link" href="./login.html">Log in</a>
+        </nav>
+      </header>
+
+      <main class="auth-grid">
+        <section class="panel auth-copy">
+          <p class="eyebrow">Create your account</p>
+          <h1>Create a private memory for the things you store.</h1>
+          <p>Register once, then use chat to log item locations and retrieve them later without digging through notes.</p>
+        </section>
+        <section class="panel auth-card">
+          <form class="auth-form" data-auth-form="register">
+            <label>Name<input type="text" name="name" required /></label>
+            <label>Email<input type="email" name="email" required /></label>
+            <label>Password<input type="password" name="password" required /></label>
+            <button class="primary-button" type="submit">Register</button>
+            <p class="error-text" data-error></p>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./scripts/auth.js"></script>
+  </body>
+  </html>

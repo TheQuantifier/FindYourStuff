@@ -1,0 +1,16 @@
+{
+  "name": "findyourstuff",
+  "version": "1.0.0",
+  "description": "Split web + API app for remembering where items are stored.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:api": "cd api && npm run dev",
+    "dev:web": "python3 -m http.server 5500 -d web",
+    "start": "cd api && npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

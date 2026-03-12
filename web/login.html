@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In | Find Your Stuff</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="site-header">
+        <a class="brand" href="./index.html">
+          <span class="brand-mark">OpenAI-style memory</span>
+          <span class="brand-name">Find Your Stuff</span>
+        </a>
+        <nav class="header-links">
+          <a class="ghost-link" href="./register.html">Register</a>
+        </nav>
+      </header>
+
+      <main class="auth-grid">
+        <section class="panel auth-copy">
+          <p class="eyebrow">Sign in</p>
+          <h1>Return to your saved item memory.</h1>
+          <p>Sign in with your email and password. After auth succeeds, the app sends you straight into chat.</p>
+        </section>
+        <section class="panel auth-card">
+          <form class="auth-form" data-auth-form="login">
+            <label>Email<input type="email" name="email" required /></label>
+            <label>Password<input type="password" name="password" required /></label>
+            <button class="primary-button" type="submit">Log in</button>
+            <p class="error-text" data-error></p>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./scripts/auth.js"></script>
+  </body>
+  </html>

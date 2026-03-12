@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Find Your Stuff</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="site-header">
+        <a class="brand" href="./index.html">
+          <span class="brand-mark">OpenAI-style memory</span>
+          <span class="brand-name">Find Your Stuff</span>
+        </a>
+        <nav class="header-links">
+          <a class="ghost-link" href="./chat.html">Back to chat</a>
+          <button class="ghost-link" id="logout-button" type="button">Sign out</button>
+        </nav>
+      </header>
+
+      <main class="landing-grid landing-grid-single">
+        <section class="panel hero-panel admin-hero">
+          <p class="eyebrow" id="admin-user-label">Admin</p>
+          <h1>Manage user roles.</h1>
+          <p class="lede">
+            Admins can review known users and change whether they are `user`, `admin`,
+            `support`, or `analyst`.
+          </p>
+        </section>
+
+        <section class="panel admin-panel">
+          <div class="items-header">
+            <div>
+              <p class="eyebrow">Access control</p>
+              <h2>Known users</h2>
+            </div>
+          </div>
+          <p class="error-text" id="admin-error"></p>
+          <ul class="admin-user-grid" id="admin-user-grid"></ul>
+          <p class="empty-state hidden" id="admin-empty-state">No users have been synced into the app yet.</p>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./scripts/admin.js"></script>
+  </body>
+  </html>
